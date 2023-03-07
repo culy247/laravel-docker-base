@@ -44,5 +44,5 @@ RUN apt-get update \
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/bin/supervisord"]
 
