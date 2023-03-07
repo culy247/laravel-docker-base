@@ -2,7 +2,6 @@ FROM ubuntu:22.04
 
 LABEL maintainer="Taylor Otwell"
 
-ARG WWWGROUP=1000
 ARG NODE_VERSION=18
 ARG POSTGRES_VERSION=14
 
@@ -44,12 +43,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
-
-RUN groupadd --force -g $WWWGROUP app
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 app
-
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
